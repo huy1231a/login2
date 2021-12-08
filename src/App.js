@@ -5,31 +5,41 @@
 function App() {
 
   const adminuser = {
-    email: "admin@admin.com",
-    password: "admin123"
+    username: "1@gmail.com",
+    password: "1234567890"
   }
 
-  const [user , setUser] = useState({name: "" , email: ""});
+  const [user , setUser] = useState({username: "" , email: ""});
   const [error , setError] = useState("");
 
-  const login = details => {
+  const Login = details => {
     console.log(details);
+    
+    if (details.email == adminuser.email && details.password == adminuser.password){
+      alert("ban dang nahp thanh cong")
+      setUser({
+        name:details.name,
+        email: details.email
+      });
+    }else{
+      alert ("ban nhap sai ")
+    }
   }
 
   const logout = () => {
-    console.log("Logout")
+     setUser({name:"" , email:""})
   }
 
 
   return (
     <div className="App">
-      {(user.email != "")? (
+      {(user.email != "")? 
         <div className = "welecome">
           <h2>Welecome, <span>{user.name}</span></h2>
-          <button>Logout</button>
+          <button className="btn" onClick={logout}>Logout</button>
         </div>
-      ) : (
-        <LoginForm login={login} error = {error}/>
+       : (
+        <LoginForm Login={Login} error = {error}/>
       )}
     </div>
   );
